@@ -13,7 +13,6 @@ E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\VBCSCompiler.exe.config
 E:\WebProjects\MEXT platform\MEXT platform\bin\MEXT platform.dll.config
 E:\WebProjects\MEXT platform\MEXT platform\bin\MEXT platform.dll
 E:\WebProjects\MEXT platform\MEXT platform\bin\MEXT platform.pdb
-E:\WebProjects\MEXT platform\MEXT platform\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 E:\WebProjects\MEXT platform\MEXT platform\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 E:\WebProjects\MEXT platform\MEXT platform\obj\Debug\MEXT platform.csprojResolveAssemblyReference.cache
 E:\WebProjects\MEXT platform\MEXT platform\obj\Debug\MEXT platform.dll
