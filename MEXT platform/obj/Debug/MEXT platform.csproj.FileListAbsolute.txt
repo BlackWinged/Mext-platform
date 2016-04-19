@@ -1,0 +1,20 @@
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\csc.exe
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\System.Collections.Immutable.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\System.Reflection.Metadata.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\vbc.exe
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\VBCSCompiler.exe
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\VBCSCompiler.exe.config
+E:\WebProjects\MEXT platform\MEXT platform\bin\MEXT platform.dll.config
+E:\WebProjects\MEXT platform\MEXT platform\bin\MEXT platform.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\MEXT platform.pdb
+E:\WebProjects\MEXT platform\MEXT platform\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\WebProjects\MEXT platform\MEXT platform\obj\Debug\MEXT platform.csprojResolveAssemblyReference.cache
+E:\WebProjects\MEXT platform\MEXT platform\obj\Debug\MEXT platform.dll
+E:\WebProjects\MEXT platform\MEXT platform\obj\Debug\MEXT platform.pdb
