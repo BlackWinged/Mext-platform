@@ -17,3 +17,39 @@ E:\WebProjects\MEXT platform\MEXT platform\bin\Microsoft.CodeDom.Providers.DotNe
 E:\WebProjects\MEXT platform\MEXT platform\obj\Debug\MEXT platform.csprojResolveAssemblyReference.cache
 E:\WebProjects\MEXT platform\MEXT platform\obj\Debug\MEXT platform.dll
 E:\WebProjects\MEXT platform\MEXT platform\obj\Debug\MEXT platform.pdb
+E:\WebProjects\MEXT platform\MEXT platform\bin\Dapper.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\Dapper.SimpleCRUD.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\Dapper.pdb
+E:\WebProjects\MEXT platform\MEXT platform\bin\Dapper.xml
+E:\WebProjects\MEXT platform\MEXT platform\bin\Dapper.SimpleCRUD.pdb
+E:\WebProjects\MEXT platform\MEXT platform\bin\Dapper.SimpleCRUD.xml
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\csc.exe.config
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\csc.rsp
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\csi.exe
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\csi.rsp
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\System.AppContext.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\System.IO.FileSystem.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\vbc.exe.config
+E:\WebProjects\MEXT platform\MEXT platform\bin\roslyn\vbc.rsp
+E:\WebProjects\MEXT platform\MEXT platform\bin\Autofac.Configuration.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\Autofac.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\Autofac.Extras.AggregateService.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\Autofac.Extras.Attributed.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\Autofac.Extras.Multitenant.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\Autofac.Integration.Mef.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\Autofac.Integration.Web.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\Castle.Core.dll
+E:\WebProjects\MEXT platform\MEXT platform\bin\Autofac.xml
+E:\WebProjects\MEXT platform\MEXT platform\bin\Autofac.Configuration.xml
+E:\WebProjects\MEXT platform\MEXT platform\bin\Autofac.Extras.AggregateService.xml
+E:\WebProjects\MEXT platform\MEXT platform\bin\Autofac.Extras.Attributed.xml
+E:\WebProjects\MEXT platform\MEXT platform\bin\Autofac.Extras.Multitenant.xml
+E:\WebProjects\MEXT platform\MEXT platform\bin\Autofac.Integration.Mef.xml
+E:\WebProjects\MEXT platform\MEXT platform\bin\Autofac.Integration.Web.xml
+E:\WebProjects\MEXT platform\MEXT platform\bin\Castle.Core.xml
