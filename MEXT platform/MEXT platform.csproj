@@ -80,11 +80,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Dapper.dll" />
-    <Content Include="bin\Dapper.pdb" />
     <Content Include="bin\Dapper.SimpleCRUD.dll" />
-    <Content Include="bin\Dapper.SimpleCRUD.pdb" />
-    <Content Include="bin\Dapper.SimpleCRUD.xml" />
-    <Content Include="bin\Dapper.xml" />
+    <Content Include="bin\MEXT platform.dll" />
+    <Content Include="bin\MEXT platform.pdb" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
     <Content Include="css\animate.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\patterns\3.png" />
