@@ -7,9 +7,8 @@ using System.Data.SqlClient;
 using System.Runtime;
 using System.Configuration;
 using System.Security.Cryptography;
+using Dapper;
 
-namespace MEXT_platform.App_Code.DB.Users
-{
     class UserFactory
     {
         SqlConnection conn = new SqlConnection(ConfigurationManager.AppSettings["connString"]);
@@ -36,10 +35,10 @@ namespace MEXT_platform.App_Code.DB.Users
 
         public List<Users> getNonActivatedUsers()
         {
-            return conn.GetList<Users>("where active=0");
+            return conn.GetList<Users>("where active=0").ToList();
         }
 
-        public bool createUser(string firstname, string lastname, string username, string password, string email, int companyId, int role, int active)
+        public int? createUser(string firstname, string lastname, string username, string password, string email, int companyId, int role, int active)
         {
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
             byte[] csid = new byte[257];
@@ -60,10 +59,9 @@ namespace MEXT_platform.App_Code.DB.Users
             user.password = hashedPass;
             user.csid = csid;
             user.active = active;
-            user.companyId = companyId;
             user.role = role;
             return conn.Insert(user);
         }
 
     }
-}
+
