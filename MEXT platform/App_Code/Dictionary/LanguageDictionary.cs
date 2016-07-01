@@ -124,8 +124,8 @@ namespace LanguageDictionary
                 result.strings.Add(lang.langName);
 
             }
-            
-            return JsonConvert.SerializeObject(result);
+            String resultString = JsonConvert.SerializeObject(result);
+            return resultString;
         }
 
     }

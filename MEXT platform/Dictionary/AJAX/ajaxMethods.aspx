@@ -18,4 +18,14 @@
     Public Shared Function getDictionaryHeader(data As Object) As String
         Return LangDict.current.getJsonHeader()
     End Function
+
+    <System.Web.Services.WebMethod>
+    Public Shared Function validateChange(value As Object) As String
+        Return value
+    End Function
+
+    <System.Web.Services.WebMethod>
+    Public Shared Function setDictionaryData(data As List(Of PrintRow)) As String
+        Return LangDict.current.parseToJson()
+    End Function
 </script>

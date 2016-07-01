@@ -28,7 +28,13 @@
                         </div>
                         <div class="ibox-content">
                             <div class="">
-                                <a onclick="fnClickAddRow();" href="javascript:void(0);" class="btn btn-primary ">Add a new row</a>
+                                <a ng-href='#' ng-click='dictTableCtrl.fnClickAddRow()' href="javascript:void(0);" class="btn btn-primary ">Add a new row</a>
+                            </div>
+                            <div class="">
+                                <a ng-href='#' ng-click='dictTableCtrl.checkTableValue()' href="javascript:void(0);" class="btn btn-primary ">test</a>
+                            </div>
+                            <div class="">
+                                <a ng-href='#' ng-click='dictTableCtrl.saveValue()' href="javascript:void(0);" class="btn btn-primary ">spremi</a>
                             </div>
                             <table class="table table-striped table-bordered table-hover " id="editable">
                                 <thead>
@@ -39,8 +45,8 @@
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="row in dictTableCtrl.dictionary">
-                                        <td>{{row.rowKey}}</td>
-                                        <td ng-repeat="singleStr in row.strings track by $index">{{singleStr}}</td>
+                                        <td><input type="text" ng-model="row.rowKey" /><div style="display:block;">{{row.rowKey}}</div></td>
+                                        <td  ng-repeat="singleStr in row.strings track by $index"><input type="text" ng-model="row.strings[$index]" /> <div style="display:block;" >{{singleStr}}</div></td>
                                     </tr>
                                 </tbody>
                                 <tfoot>

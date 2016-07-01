@@ -12,38 +12,19 @@
             controllerAs: "dictTableCtrl",
             controller: ['$http', '$timeout', function ($http, $timeout) {
                 var table = this;
+                var oTable;
                 $timeout(function () {
-                    var oTable = $('#editable').DataTable();
+                    oTable = $('#editable').DataTable();
 
                     /* Apply the jEditable handlers to the table */
                     var modifiedValue
-                    oTable.$('td').editable('default.aspx', {
-                        "callback": function( sValue, y ) {
-                            var aPos = oTable.fnGetPosition( this );
-                            oTable.fnUpdate( modifiedValue, aPos[0], aPos[1] );
-                        },
-                        "submitdata": function (value, settings) {
-                            modifiedValue = value;
-                            return {
-                                "row_id": this.parentNode.getAttribute('id'),
-                             //   "column": oTable.fnGetPosition( this )[2]
-                            };
-                        },
+                    //oTable.$('td').editable('AJAX/validateChange.aspx', {
 
-                        "width": "90%",
-                        "height": "100%"
-                    } );
+                    //    "width": "90%",
+                    //    "height": "100%"
+                    //} );
 
-                function fnClickAddRow() {
-                    $('#editable').dataTable().fnAddData( [
-                        "Custom row",
-                        "New row",
-                        "New row",
-                        "New row",
-                        "New row" ] );
-
-                }
-                }, 200);
+                }, 600);
 
                 table.dictionary = {};
                 table.dictHeader = {};
@@ -55,7 +36,35 @@
                 $http.post("AJAX/ajaxMethods.aspx/getDictionaryHeader", { data: {} }).success(function (data) {
                     table.dictHeader = JSON.parse(data.d);
                 });
-              //  this.init();
+                //  this.init();
+
+                this.fnClickAddRow = function () {
+                //    $('#editable').dataTable().fnAddData([
+                //        "Custom row",
+                //        "New row",
+                //        "New row",
+                //        "New row",
+                //        "New row"]);
+                    //    $('#editable').dataTable();
+                    var nextHashKey = parseInt(table.dictionary[table.dictionary.length - 1].$$hashKey.split(":")[1])
+                    nextHashKey++;
+                    table.dictionary.push({ "rowKey": "New row", "strings": ["new row", "new row", "new row"], "$$hashKey": "object:" + nextHashKey });
+                    $timeout(function () {
+                        oTable.destroy();
+                        $('#editable').empty();
+                        $('#editable').DataTable();
+                    }, 600);
+                    
+                };
+                this.checkTableValue = function () {
+                    alert(JSON.stringify(table.dictionary));
+                }
+
+                this.saveValue = function () {
+                    $http.post("AJAX/ajaxMethods.aspx/setDictionaryData", angular.toJson({ data: table.dictionary })).success(function (data) {
+                        table.dictHeader = JSON.parse(data.d);
+                    });
+                }
             }],
         }
     });
