@@ -16,4 +16,10 @@
         Return result
     End Function
 
+    <System.Web.Services.WebMethod>
+    Public Shared Function setCards(data As String) As String
+        Dim result As String = SatoriReaderConnector.sendCardStatus(data)
+        Return result
+    End Function
+
 </script>

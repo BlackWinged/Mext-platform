@@ -32,41 +32,27 @@
                             </div>
 
                             <label>{{ReviewContainer.currentCard.cardType}}</label><br />
-                            <h1>
+                            <h1 ng-show="ReviewContainer.isJapanese() || ReviewContainer.showAll">
                                 <ruby ng-repeat="express in ReviewContainer.currentCard.expression_text">
                                     {{express.kanji}}
                                     <rp>(</rp><rt>{{express.hiragana}}</rt><rp>)</rp>
                                 </ruby>
                             </h1>
-                            <h1>
+                            <h1 ng-show="!ReviewContainer.isJapanese() || ReviewContainer.showAll">
                                     {{ReviewContainer.currentCard.definition_text}}
                             </h1>
-                            <h1>
+                            <h1 ng-show="ReviewContainer.isJapanese() || ReviewContainer.showAll">
+                                Context:<br />
                                 <ruby ng-repeat="express in ReviewContainer.currentCard.contexts[0].expression_text">
                                     {{express.kanji}}
                                     <rp>(</rp><rt>{{express.hiragana}}</rt><rp>)</rp>
                                 </ruby>
                             </h1>
-                            <!--<table class="table table-striped table-bordered table-hover " id="editable">
-                                <thead>
-                                    <tr>
-                                        <th>{{dictTableCtrl.dictHeader.rowKey}}</th>
-                                        <th ng-repeat="singleStrHeader in dictTableCtrl.dictHeader.strings track by $index">{{singleStrHeader}}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="row in dictTableCtrl.dictionary">
-                                        <td><input type="text" ng-model="row.rowKey" /><div style="display:block;">{{row.rowKey}}</div></td>
-                                        <td  ng-repeat="singleStr in row.strings track by $index"><input type="text" ng-model="row.strings[$index]" /> <div style="display:block;" >{{singleStr}}</div></td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>{{dictTableCtrl.dictHeader.rowKey}}</th>
-                                        <th ng-repeat="singleStrHeader in dictTableCtrl.dictHeader.strings track by $index">{{singleStrHeader}}</th>
-                                    </tr>
-                                </tfoot>
-                            </table>-->
+                            <form  ng-show="!ReviewContainer.showAll" ng-submit="ReviewContainer.checkAnswer()">
+                                <input  ng-model="ReviewContainer.answer" id="answer" name="answer"/>
+                               <br /> <label> hiragana only string: {{ReviewContainer.currentHiraganaExpression}} </label>
+                                <br /> <label> Kanji only string: {{ReviewContainer.currentKanjiExpression}} </label>
+                            </form>
                         </div>
                     </div>
                 </div>

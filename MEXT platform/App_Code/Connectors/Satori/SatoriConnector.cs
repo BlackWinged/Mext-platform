@@ -51,7 +51,7 @@ public class SatoriReaderConnector
             // NetworkCredential cred = new NetworkCredential("lovro.gamulin@gmail.com", "5h4d0wnetM");
             //request.Credentials = cred;
             request.Method = method;
-            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentType = "application/"+contentType;
             StreamWriter requestStream = new StreamWriter(request.GetRequestStream());
             requestStream.Write(content);
             requestStream.Flush();
@@ -77,7 +77,7 @@ public class SatoriReaderConnector
         string content = "username=" + HttpUtility.UrlEncode("lovro.gamulin@gmail.com") + "&";
         content += "password=" + HttpUtility.UrlEncode("5h4d0wnetM");
         fireRequest(parameters);
-        fireRequestWithMethod(parameters, content);
+        fireRequestWithMethod(parameters, content, "POST", "x-www-form-urlencoded");
     }
 
     public static List<SatoriReview> getDueCards()
@@ -91,6 +91,13 @@ public class SatoriReaderConnector
             cards.Add(JsonConvert.DeserializeObject<SatoriReview>(item.ToString()));
         }
         return cards;
+    }
+
+    public static string sendCardStatus (string cardId)
+    {
+        string parameters = "https://www.satorireader.com/api/studylist/" + cardId;
+        string result = fireRequestWithMethod(parameters, "", "PUT", "x-www-form-urlencoded");
+        return result;
     }
 
     //exampul
