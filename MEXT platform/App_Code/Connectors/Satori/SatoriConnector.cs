@@ -100,26 +100,6 @@ public class SatoriReaderConnector
         return result;
     }
 
-    //exampul
-
-    //public static List<string> insertPartner(object partnerObject)
-    //    {
-    //        dynamic @params = "/Partneri/snimi";
-    //        List<object> arrayWrapper = new List<object>();
-    //        arrayWrapper.Add(partnerObject);
-    //        JToken content = JToken.Parse(JsonConvert.SerializeObject(arrayWrapper));
-    //        JObject contentArray = new JObject();
-    //        contentArray.Add("partner", content);
-    //        JObject resultJson = fireRequestWithMethod(@params, contentArray, "POST");
-    //        List<JToken> rezultati = resultJson["result"].Children().ToList();
-    //        List<string> attributeSet = new List<string>();
-    //        List<string> resultSet = new List<string>();
-    //        foreach (JToken item in rezultati)
-    //        {
-    //            resultSet.Add(item.ToString());
-    //        }
-    //        return resultSet;
-    //    }
 
 
 }
