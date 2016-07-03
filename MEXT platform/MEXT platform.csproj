@@ -176,6 +176,7 @@
     <Content Include="css\plugins\toastr\toastr.min.css" />
     <Content Include="css\plugins\touchspin\jquery.bootstrap-touchspin.min.css" />
     <Content Include="css\style.css" />
+    <Content Include="login.aspx" />
     <Content Include="SatoriReview\AJAX\ajaxMethods.aspx" />
     <Content Include="SatoriReview\AJAX\validateChange.aspx" />
     <Content Include="SatoriReview\css\animate.css" />
@@ -696,7 +697,6 @@
     <Content Include="SatoriReview\js\plugins\validate\jquery.validate.min.js" />
     <Content Include="SatoriReview\js\plugins\video\responsible-video.js" />
     <Content Include="SatoriReview\js\plugins\wow\wow.min.js" />
-    <Content Include="SatoriReview\Proto\default.aspx" />
     <Content Include="Dictionary\AJAX\validateChange.aspx" />
     <Content Include="Dictionary\css\animate.css" />
     <Content Include="Dictionary\css\bootstrap.min.css" />
@@ -1729,7 +1729,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Code\DB\Users\UserFactory.cs" />
-    <Content Include="App_Code\DB\DataTypes.cs" />
+    <Content Include="App_Code\DB\Users\UserDataTypes.cs" />
     <Content Include="App_Code\Connectors\Wanikani\WanikaniConnector.cs" />
     <Content Include="App_Code\Dictionary\LangTypes.cs" />
     <Content Include="App_Code\Dictionary\LanguageDictionary.cs" />
@@ -1738,10 +1738,13 @@
     <Content Include="App_Code\Connectors\Wanikani\WaniKaniTypes.cs" />
     <Content Include="App_Code\Connectors\Satori\SatoriConnector.cs" />
     <Content Include="App_Code\Connectors\Satori\SatoriTypes.cs" />
+    <Content Include="App_Code\Security\Filter\AuthFilter.cs" />
+    <Content Include="App_Code\Security\Filter\SecurityFilterSection.cs" />
+    <Content Include="App_Code\Enums\CollectionKeys.cs" />
+    <Content Include="App_Code\Security\SecurityHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Code\Security\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>

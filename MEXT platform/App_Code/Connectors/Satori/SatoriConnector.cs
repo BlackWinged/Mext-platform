@@ -47,6 +47,10 @@ public class SatoriReaderConnector
         try
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(@params);
+            if ((CookieContainer)HttpContext.Current.Session["satori_cookies"] == null)
+            {
+                signIn();
+            }
             request.CookieContainer = (CookieContainer)HttpContext.Current.Session["satori_cookies"];
             // NetworkCredential cred = new NetworkCredential("lovro.gamulin@gmail.com", "5h4d0wnetM");
             //request.Credentials = cred;
