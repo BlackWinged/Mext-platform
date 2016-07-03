@@ -1,10 +1,6 @@
 ﻿
-using Microsoft.VisualBasic;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 using System.Configuration;
 using System.Web;
 using static SecurityFilterSection;
@@ -45,9 +41,14 @@ public class AuthFilter : IHttpModule
         if (HttpContext.Current.Session != null)
         {
             List<string> items = new List<string>(HttpContext.Current.Request.FilePath.ToString().Split('/'));
+            List<string> lowitems = new List<string>();
+            foreach (string item in items)
+            {
+                lowitems.Add( item.ToLower());
+            }
             foreach (restrictedAppElement item in settings.restrictedSubApp)
             {
-                if (items.Contains(item.appName))
+                if (lowitems.Contains(item.appName.ToLower()))
                 {
                     SecurityHelper.authorizeSessionOrCookies();
                 }
