@@ -7,23 +7,30 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Text.RegularExpressions;
+using Dapper;
 
 public class baseResponse
 {
 
 }
-
+[Table("Satori_Review")]
 public class SatoriReview
 {
     public long id { get; set; }
     [JsonIgnore]
     public long? userId { get; set; }
     public string cardId { get; set; }
+    [Editable(false)]
     public string entryId { get; set; }
+    [Editable(false)]
     public string senseId { get; set; }
+    [Editable(false)]
     public string cardType { get; set; }
+    [Editable(false)]
     public string whenCreated { get; set; }
+    [Editable(false)]
     public string expression { get; set; }
+    [Editable(false)]
     public List<Satori_word> expression_text
     {
         get
@@ -45,7 +52,9 @@ public class SatoriReview
             return result;
         }
     }
+    [Editable(false)]
     public string definition { get; set; }
+    [Editable(false)]
     public string definition_text
     {
         get
@@ -68,14 +77,24 @@ public class SatoriReview
             return result;
         }
     }
+    [Editable(false)]
     public int? totalCorrect { get; set; }
+    [Editable(false)]
     public int? totalIncorrect { get; set; }
+    [Editable(false)]
     public int? consecutiveCorrect { get; set; }
+    [Editable(false)]
     public float ef { get; set; }
+    [Editable(false)]
     public float q { get; set; }
+    [Editable(false)]
     public string whenUpdated { get; set; }
+    [Editable(false)]
     public string nextDueDate { get; set; }
+    [Editable(false)]
     public List<SatoriReview> contexts { get; set; }
+    public string alternateDefinitions;
+    public string mnemonics;
 }
 
 public class Satori_word

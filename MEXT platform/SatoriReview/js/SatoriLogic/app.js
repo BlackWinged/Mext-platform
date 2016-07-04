@@ -5,6 +5,23 @@
         this.productGroup = {};
     });
 
+    app.directive("keypressEvents", [
+  '$document',
+  '$rootScope',
+  function ($document, $rootScope) {
+      return {
+          restrict: 'A',
+          link: function () {
+              $document.bind('keypress', function (e) {
+                  console.log('Got keypress:', e.which);
+                  $rootScope.$broadcast('keypress', e);
+                  $rootScope.$broadcast('keypress:' + e.which, e);
+              });
+          }
+      };
+  }
+    ]);
+
     app.directive("reviewContainer", function () {
         return {
             restrict: "E",
@@ -49,7 +66,7 @@
                             });
                         }
                     } else {
-                        if (reviewContainer.currentCard.definition_text.toLowerCase().search(reviewContainer.answer) > -1) {
+                        if (reviewContainer.currentCard.definition_text.toLowerCase().replace(" ", "").replace("-","").search(reviewContainer.answer) > -1) {
                             alert("is bueno");
                             $http.post("AJAX/ajaxMethods.aspx/setCards", JSON.stringify({ data: reviewContainer.currentCard.cardId + "?q=3" })).success(function (data) {
                                 alert(data.d);
@@ -90,6 +107,20 @@
                             reviewContainer.currentKanjiExpression = result;
                     });
                 }
+
+                this.handleEnter = function (event) {
+                    if (reviewContainer.showAll == true) {
+                        if (event.keycode == 13) {
+                            alert("test");
+                        }
+                    }
+                }
+                $scope.$on('keypress:13', function (onEvent, keypressEvent) {
+                    if (reviewContainer.showAll == true) {
+                        $scope.$apply(reviewContainer.nextCard());
+                    }
+                });
+                
             }],
         }
     });

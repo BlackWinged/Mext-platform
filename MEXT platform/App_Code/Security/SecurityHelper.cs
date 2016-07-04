@@ -25,12 +25,12 @@ public class SecurityHelper
                 }
                 else
                 {
-                    HttpContext.Current.Response.Redirect("~/login.aspx");
+                    HttpContext.Current.Response.Redirect("~/login.aspx?"+CollectionKeys.signInParameters+"="+HttpContext.Current.Request.RawUrl);
                 }
             }
             else
             {
-                HttpContext.Current.Response.Redirect("~/login.aspx");
+                HttpContext.Current.Response.Redirect("~/login.aspx?" + CollectionKeys.signInParameters + "=" + HttpContext.Current.Request.RawUrl);
             }
         }
     }
