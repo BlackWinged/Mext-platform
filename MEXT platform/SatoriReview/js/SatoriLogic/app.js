@@ -42,6 +42,10 @@
                     reviewContainer.currentCard = reviewContainer.cards[reviewContainer.cardCount];
                     reviewContainer.buildHiraganaExpression();
                     reviewContainer.buildKanjiExpression();
+                    if (reviewContainer.currentCard.alternateDefinitions == null) {
+                        reviewContainer.currentCard.alternateDefinitions = "";
+                    }
+                    reviewContainer.currentCard.full_definition = reviewContainer.currentCard.definition_text + "; " + reviewContainer.currentCard.alternateDefinitions;
                 });
 
                 this.nextCard = function () {
@@ -50,6 +54,10 @@
                     reviewContainer.buildHiraganaExpression();
                     reviewContainer.buildKanjiExpression();
                     reviewContainer.showAll = false;
+                    if (reviewContainer.currentCard.alternateDefinitions == null) {
+                        reviewContainer.currentCard.alternateDefinitions = "";
+                    }
+                    reviewContainer.currentCard.full_definition = reviewContainer.currentCard.definition_text + "; " + reviewContainer.currentCard.alternateDefinitions;
                 }
 
                 this.checkAnswer = function () {
@@ -57,24 +65,24 @@
                         if (reviewContainer.currentHiraganaExpression.toLowerCase().search(reviewContainer.answer) > -1 || reviewContainer.currentKanjiExpression.toLowerCase().search(reviewContainer.answer) > -1) {
                             alert("is bueno");
                             $http.post("AJAX/ajaxMethods.aspx/setCards", JSON.stringify({ data: reviewContainer.currentCard.cardId+"?q=3" })).success(function (data) {
-                                alert(data.d);
+                               // alert(data.d);
                             });
                         } else {
                             alert("no es bueno");
                             $http.post("AJAX/ajaxMethods.aspx/setCards", JSON.stringify({ data: reviewContainer.currentCard.cardId + "?q=0" })).success(function (data) {
-                                alert(data.d);
+                                // alert(data.d);
                             });
                         }
                     } else {
-                        if (reviewContainer.currentCard.definition_text.toLowerCase().replace(" ", "").replace("-","").search(reviewContainer.answer) > -1) {
+                        if (reviewContainer.currentCard.full_definition.toLowerCase().replace(" ", "").replace("-", "").search(reviewContainer.answer) > -1) {
                             alert("is bueno");
                             $http.post("AJAX/ajaxMethods.aspx/setCards", JSON.stringify({ data: reviewContainer.currentCard.cardId + "?q=3" })).success(function (data) {
-                                alert(data.d);
+                               // alert(data.d);
                             });
                         } else {
                             alert("no es bueno");
                             $http.post("AJAX/ajaxMethods.aspx/setCards", JSON.stringify({ data: reviewContainer.currentCard.cardId + "?q=0" })).success(function (data) {
-                                alert(data.d);
+                                // alert(data.d);
                             });
                         }
                     }
@@ -115,6 +123,11 @@
                         }
                     }
                 }
+
+                this.saveCard = function () {
+                    $http.post("AJAX/ajaxMethods.aspx/saveCardData", JSON.stringify({ card: reviewContainer.currentCard }));
+                }
+
                 $scope.$on('keypress:13', function (onEvent, keypressEvent) {
                     if (reviewContainer.showAll == true) {
                         $scope.$apply(reviewContainer.nextCard());

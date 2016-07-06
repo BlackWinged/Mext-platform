@@ -16,6 +16,7 @@ public class SatoriReaderConnector
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(@params);
             CookieContainer newContainer = new CookieContainer();
+            SatoriDatabaseHelper.authorizeSession();
             if (HttpContext.Current.Session["satori_cookies"] != null)
             {
                 newContainer = (CookieContainer)HttpContext.Current.Session["satori_cookies"];
@@ -49,7 +50,7 @@ public class SatoriReaderConnector
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(@params);
             if ((CookieContainer)HttpContext.Current.Session["satori_cookies"] == null)
             {
-                signIn();
+                SatoriDatabaseHelper.authorizeSession();
             }
             request.CookieContainer = (CookieContainer)HttpContext.Current.Session["satori_cookies"];
             // NetworkCredential cred = new NetworkCredential("lovro.gamulin@gmail.com", "5h4d0wnetM");
@@ -75,13 +76,16 @@ public class SatoriReaderConnector
         }
     }
 
-    public static void signIn()
+    public static void signIn(string username, string password)
     {
         string parameters = "https://www.satorireader.com/signin";
-        string content = "username=" + HttpUtility.UrlEncode("lovro.gamulin@gmail.com") + "&";
-        content += "password=" + HttpUtility.UrlEncode("5h4d0wnetM");
+        string content = "username=" + HttpUtility.UrlEncode(username) + "&";
+        content += "password=" + HttpUtility.UrlEncode(password);
         fireRequest(parameters);
         fireRequestWithMethod(parameters, content, "POST", "x-www-form-urlencoded");
+        Users user = (Users)HttpContext.Current.Session[ CollectionKeys.CurrentUser];
+        CookieContainer cookieJar = (CookieContainer)HttpContext.Current.Session[CollectionKeys.satoriCookies];
+        SatoriDatabaseHelper.saveUser(user.id, cookieJar);
     }
 
     public static List<SatoriReview> getDueCards()

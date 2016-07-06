@@ -7,4 +7,5 @@ using System.Web;
     {
         public static string CurrentUser = "CurrentUser";
     public static string signInParameters = "signParam";
+    public static string satoriCookies = "satori_cookies";
 }

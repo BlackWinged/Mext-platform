@@ -39,7 +39,7 @@
                                 </ruby>
                             </h1>
                             <h1 ng-show="!ReviewContainer.isJapanese() || ReviewContainer.showAll">
-                                    {{ReviewContainer.currentCard.definition_text}}
+                                    {{ReviewContainer.currentCard.full_definition}}
                             </h1>
                             <h1 ng-show="ReviewContainer.isJapanese() || ReviewContainer.showAll">
                                 Context:<br />
@@ -48,6 +48,17 @@
                                     <rp>(</rp><rt>{{express.hiragana}}</rt><rp>)</rp>
                                 </ruby>
                             </h1>
+                            <div id="alt-info" ng-show="ReviewContainer.showAll" ng-submit="ReviewContainer.saveCard()">
+                                <label for="alt-discussion">Alternative definition</label><br />
+                                <textarea ng-model="ReviewContainer.currentCard.alternateDefinitions" id="alt-discussion" name="alt-discussion" ></textarea>  <br />
+                                {{ReviewContainer.currentCard.alternateDefinitions}}<br />
+                                <label for="mnemonics">Alternative mnemonic</label><br />
+                                <textarea ng-model="ReviewContainer.currentCard.mnemonics" id="mnemonics" name="mnemonics" ></textarea>  <br />
+                                {{ReviewContainer.currentCard.mnemonics}}<br />
+                                <div class="">
+                                    <a ng-href='#' id="next-card" ng-click='ReviewContainer.saveCard()' href="javascript:void(0);" class="btn btn-primary ">Save card</a>
+                                </div>
+                            </div>
                             <form  ng-show="!ReviewContainer.showAll" ng-submit="ReviewContainer.checkAnswer()">
                                 <input  ng-model="ReviewContainer.answer" id="answer" name="answer" />
                             </form>

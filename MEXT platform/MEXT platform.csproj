@@ -1742,6 +1742,7 @@
     <Content Include="App_Code\Security\Filter\SecurityFilterSection.cs" />
     <Content Include="App_Code\Enums\CollectionKeys.cs" />
     <Content Include="App_Code\Security\SecurityHelper.cs" />
+    <Content Include="App_Code\Connectors\Satori\SatoriDatabaseHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

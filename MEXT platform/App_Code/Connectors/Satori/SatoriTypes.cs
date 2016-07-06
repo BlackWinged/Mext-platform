@@ -16,20 +16,30 @@ public class baseResponse
 [Table("Satori_Review")]
 public class SatoriReview
 {
+    [Key]
     public long id { get; set; }
     [JsonIgnore]
     public long? userId { get; set; }
     public string cardId { get; set; }
-    [Editable(false)]
     public string entryId { get; set; }
-    [Editable(false)]
     public string senseId { get; set; }
-    [Editable(false)]
     public string cardType { get; set; }
-    [Editable(false)]
     public string whenCreated { get; set; }
     [Editable(false)]
     public string expression { get; set; }
+    [Column("expression")]
+    public string expressionFullString
+    {
+        get
+        {
+            string result = "";
+            foreach (Satori_word item in expression_text)
+            {
+                result += item.kanji;
+            }
+            return result;
+        }
+    }
     [Editable(false)]
     public List<Satori_word> expression_text
     {
@@ -54,7 +64,7 @@ public class SatoriReview
     }
     [Editable(false)]
     public string definition { get; set; }
-    [Editable(false)]
+    [Column("definition")]
     public string definition_text
     {
         get
@@ -77,28 +87,34 @@ public class SatoriReview
             return result;
         }
     }
-    [Editable(false)]
     public int? totalCorrect { get; set; }
-    [Editable(false)]
     public int? totalIncorrect { get; set; }
-    [Editable(false)]
     public int? consecutiveCorrect { get; set; }
     [Editable(false)]
     public float ef { get; set; }
     [Editable(false)]
     public float q { get; set; }
-    [Editable(false)]
     public string whenUpdated { get; set; }
-    [Editable(false)]
     public string nextDueDate { get; set; }
     [Editable(false)]
     public List<SatoriReview> contexts { get; set; }
-    public string alternateDefinitions;
-    public string mnemonics;
+    public string alternateDefinitions { get; set; }
+    public string mnemonics { get; set; }
 }
 
 public class Satori_word
 {
     public string kanji;
     public string hiragana;
+}
+
+[Table("Satori_UserAccountData")]
+public class Satori_user
+{
+    [Key]
+    public int id { get; set; }
+    public int userId { get; set; }
+    public string username { get; set; }
+    public byte[] password { get; set; }
+    public byte[] cookie { get; set; }
 }
