@@ -36,6 +36,18 @@
                 reviewContainer.showAll = false;
                 reviewContainer.currentHiraganaExpression = "";
                 reviewContainer.currentKanjiExpression = "";
+                reviewContainer.q = 5;
+                reviewContainer.getQStatus = ["You done goofed", "", "", "Hard", "Alright", "E-Z"];
+                reviewContainer.timerStatus;
+                reviewContainer.countDown = function () {
+                    return $timeout(function () {
+                        if ((reviewContainer.q > 3) && (reviewContainer.showAll == false)) {
+                            reviewContainer.q--;
+                        }
+                        reviewContainer.countDown();
+                    }, 10000);
+                }
+
 
                 $http.post("AJAX/ajaxMethods.aspx/getCards", { data: {} }).success(function (data) {
                     reviewContainer.cards = JSON.parse(data.d);
@@ -46,6 +58,7 @@
                         reviewContainer.currentCard.alternateDefinitions = "";
                     }
                     reviewContainer.currentCard.full_definition = reviewContainer.currentCard.definition_text + "; " + reviewContainer.currentCard.alternateDefinitions;
+                    reviewContainer.timerStatus = reviewContainer.countDown();
                 });
 
                 this.nextCard = function () {
@@ -59,32 +72,37 @@
                         reviewContainer.currentCard.alternateDefinitions = "";
                     }
                     reviewContainer.currentCard.full_definition = reviewContainer.currentCard.definition_text + "; " + reviewContainer.currentCard.alternateDefinitions;
+                    $timeout.cancel(reviewContainer.timerStatus);
+                    reviewContainer.timerStatus = reviewContainer.countDown();
+                    reviewContainer.q = 5;
                 }
 
                 this.checkAnswer = function () {
                     if (reviewContainer.currentCard.cardType == "EJ") {
                         if (reviewContainer.currentHiraganaExpression.toLowerCase().search(reviewContainer.answer.toLowerCase()) > -1 || reviewContainer.currentKanjiExpression.toLowerCase().search(reviewContainer.answer.toLowerCase()) > -1) {
                             alert("is bueno");
-                            $http.post("AJAX/ajaxMethods.aspx/setCards", JSON.stringify({ data: reviewContainer.currentCard.cardId+"?q=3" })).success(function (data) {
-                               // alert(data.d);
+                            $http.post("AJAX/ajaxMethods.aspx/setCards", JSON.stringify({ data: reviewContainer.currentCard.cardId + "?q=" + reviewContainer.q })).success(function (data) {
+                                // alert(data.d);
                             });
                         } else {
                             alert("no es bueno");
                             $http.post("AJAX/ajaxMethods.aspx/setCards", JSON.stringify({ data: reviewContainer.currentCard.cardId + "?q=0" })).success(function (data) {
                                 // alert(data.d);
                             });
+                            reviewContainer.q = 0;
                         }
                     } else {
-                        if (reviewContainer.currentCard.full_definition.toLowerCase().replace(" ", "").replace("-", "").search(reviewContainer.answer.toLowerCase().replace(" ", "").replace("-", "")) > -1) {
+                        if (reviewContainer.currentCard.full_definition.toLowerCase().replaceAll(" ", "").replaceAll("-", "").search(reviewContainer.answer.toLowerCase().replaceAll(" ", "").replaceAll("-", "")) > -1) {
                             alert("is bueno");
-                            $http.post("AJAX/ajaxMethods.aspx/setCards", JSON.stringify({ data: reviewContainer.currentCard.cardId + "?q=3" })).success(function (data) {
-                               // alert(data.d);
+                            $http.post("AJAX/ajaxMethods.aspx/setCards", JSON.stringify({ data: reviewContainer.currentCard.cardId + "?q=" + reviewContainer.q })).success(function (data) {
+                                // alert(data.d);
                             });
                         } else {
                             alert("no es bueno");
                             $http.post("AJAX/ajaxMethods.aspx/setCards", JSON.stringify({ data: reviewContainer.currentCard.cardId + "?q=0" })).success(function (data) {
                                 // alert(data.d);
                             });
+                            reviewContainer.q = 0;
                         }
                     }
                     reviewContainer.showAll = true;
@@ -111,8 +129,8 @@
                 this.buildKanjiExpression = function () {
                     result = ""
                     angular.forEach(reviewContainer.currentCard.expression_text, function (value, key) {
-                            result += value.kanji;
-                            reviewContainer.currentKanjiExpression = result;
+                        result += value.kanji;
+                        reviewContainer.currentKanjiExpression = result;
                     });
                 }
 
@@ -128,12 +146,17 @@
                     $http.post("AJAX/ajaxMethods.aspx/saveCardData", JSON.stringify({ card: reviewContainer.currentCard }));
                 }
 
+                this.saveCard = function () {
+                    $http.post("AJAX/ajaxMethods.aspx/saveCardData", JSON.stringify({ card: reviewContainer.currentCard }));
+                }
+
+
                 $scope.$on('keypress:13', function (onEvent, keypressEvent) {
                     if (reviewContainer.showAll == true) {
                         $scope.$apply(reviewContainer.nextCard());
                     }
                 });
-                
+
             }],
         }
     });
@@ -151,3 +174,9 @@
 
 
 })();
+
+
+String.prototype.replaceAll = function (search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
