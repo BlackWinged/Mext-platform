@@ -63,7 +63,7 @@
 
                 this.checkAnswer = function () {
                     if (reviewContainer.currentCard.cardType == "EJ") {
-                        if (reviewContainer.currentHiraganaExpression.toLowerCase().search(reviewContainer.answer) > -1 || reviewContainer.currentKanjiExpression.toLowerCase().search(reviewContainer.answer) > -1) {
+                        if (reviewContainer.currentHiraganaExpression.toLowerCase().search(reviewContainer.answer.toLowerCase()) > -1 || reviewContainer.currentKanjiExpression.toLowerCase().search(reviewContainer.answer.toLowerCase()) > -1) {
                             alert("is bueno");
                             $http.post("AJAX/ajaxMethods.aspx/setCards", JSON.stringify({ data: reviewContainer.currentCard.cardId+"?q=3" })).success(function (data) {
                                // alert(data.d);
@@ -75,7 +75,7 @@
                             });
                         }
                     } else {
-                        if (reviewContainer.currentCard.full_definition.toLowerCase().replace(" ", "").replace("-", "").search(reviewContainer.answer) > -1) {
+                        if (reviewContainer.currentCard.full_definition.toLowerCase().replace(" ", "").replace("-", "").search(reviewContainer.answer.toLowerCase().replace(" ", "").replace("-", "")) > -1) {
                             alert("is bueno");
                             $http.post("AJAX/ajaxMethods.aspx/setCards", JSON.stringify({ data: reviewContainer.currentCard.cardId + "?q=3" })).success(function (data) {
                                // alert(data.d);
@@ -88,7 +88,6 @@
                         }
                     }
                     reviewContainer.showAll = true;
-                    reviewContainer.answer = ""
                 }
 
                 this.isJapanese = function () {
