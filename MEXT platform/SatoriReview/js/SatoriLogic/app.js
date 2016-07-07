@@ -54,6 +54,7 @@
                     reviewContainer.buildHiraganaExpression();
                     reviewContainer.buildKanjiExpression();
                     reviewContainer.showAll = false;
+                    reviewContainer.answer = ""
                     if (reviewContainer.currentCard.alternateDefinitions == null) {
                         reviewContainer.currentCard.alternateDefinitions = "";
                     }

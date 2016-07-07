@@ -59,8 +59,8 @@
                                     <a ng-href='#' id="next-card" ng-click='ReviewContainer.saveCard()' href="javascript:void(0);" class="btn btn-primary ">Save card</a>
                                 </div>
                             </div>
-                            <form  ng-show="!ReviewContainer.showAll" ng-submit="ReviewContainer.checkAnswer()">
-                                <input  ng-model="ReviewContainer.answer" id="answer" name="answer" />
+                            <form   ng-submit="ReviewContainer.checkAnswer()">
+                                <input ng-disabled="ReviewContainer.showAll"  ng-model="ReviewContainer.answer" id="answer" name="answer" />
                             </form>
                         </div>
                     </div>
