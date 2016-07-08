@@ -46,7 +46,7 @@
                             </div>
                             <form ng-submit="ReviewContainer.checkAnswer()">
                                 <input ng-disabled="ReviewContainer.showAll" ng-model="ReviewContainer.answer" id="answer" name="answer" />
-                                <input type="submit" id="submit" name="submit" value="Check card"/>
+                                <input ng-disabled="ReviewContainer.showAll" type="submit" id="submit" name="submit" value="Check card"/>
                             </form>
                         </div>
                     </div>
