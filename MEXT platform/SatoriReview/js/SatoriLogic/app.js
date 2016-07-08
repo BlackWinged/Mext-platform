@@ -37,8 +37,9 @@
                 reviewContainer.currentHiraganaExpression = "";
                 reviewContainer.currentKanjiExpression = "";
                 reviewContainer.q = 5;
-                reviewContainer.getQStatus = ["You done goofed", "", "", "Hard", "Alright", "E-Z"];
-                reviewContainer.timerStatus;
+                reviewContainer.getQStatus = ["You done goofed", "", "", "Hard", "Alright", "E-Z", "E-Z"];
+                reviewContainer.isLoading = true;
+                reviewContainer.error = "";
                 reviewContainer.countDown = function () {
                     return $timeout(function () {
                         if ((reviewContainer.q > 3) && (reviewContainer.showAll == false)) {
@@ -58,8 +59,12 @@
                         reviewContainer.currentCard.alternateDefinitions = "";
                     }
                     reviewContainer.currentCard.full_definition = reviewContainer.currentCard.definition_text + "; " + reviewContainer.currentCard.alternateDefinitions;
-                    reviewContainer.timerStatus = reviewContainer.countDown();
-                });
+                    reviewContainer.countDown();
+                    reviewContainer.isLoading = false;
+                }).error(function (error, status){
+                    reviewContainer.error = " message: " + JSON.stringify(error) + ", status: " + status;
+                    reviewContainer.isLoading = false;
+                }); 
 
                 this.nextCard = function () {
                     reviewContainer.cardCount++;
@@ -72,9 +77,7 @@
                         reviewContainer.currentCard.alternateDefinitions = "";
                     }
                     reviewContainer.currentCard.full_definition = reviewContainer.currentCard.definition_text + "; " + reviewContainer.currentCard.alternateDefinitions;
-                    $timeout.cancel(reviewContainer.timerStatus);
-                    reviewContainer.timerStatus = reviewContainer.countDown();
-                    reviewContainer.q = 5;
+                    reviewContainer.q = 6;
                 }
 
                 this.checkAnswer = function () {

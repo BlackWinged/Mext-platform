@@ -1,32 +1,17 @@
 ﻿<div class="row">
     <div class="col-lg-12">
-        <div class="wrapper wrapper-content animated fadeInRight" keypress-events >
+        <div class="wrapper wrapper-content animated fadeInRight" keypress-events>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Editable Table in- combination with jEditable</h5>
-                            <div class="ibox-tools">
-                                <a class="collapse-link">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <i class="fa fa-wrench"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-user">
-                                    <li>
-                                        <a href="#">Config option 1</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Config option 2</a>
-                                    </li>
-                                </ul>
-                                <a class="close-link">
-                                    <i class="fa fa-times"></i>
-                                </a>
-                            </div>
+                            <h5>Satori review cards {{ReviewContainer.cardCount + 1}} / 20</h5>
                         </div>
-                        <div class="ibox-content">
+                        <div ng-show="ReviewContainer.isLoading || ReviewContainer.error" class="ibox-content">
+                            <label ng-hide="ReviewContainer.error">Hold on, loading cards</label>
+                            <label ng-show="ReviewContainer.error">{{ReviewContainer.error}}</label>
+                        </div>
+                        <div ng-show="!(ReviewContainer.isLoading || ReviewContainer.error)" class="ibox-content">
                             <div class="">
                                 <a ng-href='#' id="next-card" ng-click='ReviewContainer.nextCard()' href="javascript:void(0);" class="btn btn-primary ">Sljedeca karta</a>
                             </div>
@@ -39,7 +24,7 @@
                                 </ruby>
                             </h1>
                             <h1 ng-show="!ReviewContainer.isJapanese() || ReviewContainer.showAll">
-                                    {{ReviewContainer.currentCard.full_definition}}
+                                {{ReviewContainer.currentCard.full_definition}}
                             </h1>
                             <h1 ng-show="ReviewContainer.isJapanese() || ReviewContainer.showAll">
                                 Context:<br />
@@ -50,17 +35,17 @@
                             </h1>
                             <div id="alt-info" ng-show="ReviewContainer.showAll" ng-submit="ReviewContainer.saveCard()">
                                 <label for="alt-discussion">Alternative definition</label><br />
-                                <textarea ng-model="ReviewContainer.currentCard.alternateDefinitions" id="alt-discussion" name="alt-discussion" ></textarea>  <br />
+                                <textarea ng-model="ReviewContainer.currentCard.alternateDefinitions" id="alt-discussion" name="alt-discussion"></textarea>  <br />
                                 {{ReviewContainer.currentCard.alternateDefinitions}}<br />
                                 <label for="mnemonics">Alternative mnemonic</label><br />
-                                <textarea ng-model="ReviewContainer.currentCard.mnemonics" id="mnemonics" name="mnemonics" ></textarea>  <br />
+                                <textarea ng-model="ReviewContainer.currentCard.mnemonics" id="mnemonics" name="mnemonics"></textarea>  <br />
                                 {{ReviewContainer.currentCard.mnemonics}}<br />
                                 <div class="">
                                     <a ng-href='#' id="next-card" ng-click='ReviewContainer.saveCard()' href="javascript:void(0);" class="btn btn-primary ">Save card</a>
                                 </div>
                             </div>
-                            <form   ng-submit="ReviewContainer.checkAnswer()">
-                                <input ng-disabled="ReviewContainer.showAll"  ng-model="ReviewContainer.answer" id="answer" name="answer" />
+                            <form ng-submit="ReviewContainer.checkAnswer()">
+                                <input ng-disabled="ReviewContainer.showAll" ng-model="ReviewContainer.answer" id="answer" name="answer" />
                             </form>
                         </div>
                     </div>

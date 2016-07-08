@@ -5,7 +5,7 @@
 
 <script RunAt="server">
     protected void Application_Start(object sender, EventArgs e)
-        {
-        LangDict lang = new LangDict();
-        }
+    {
+        //LangDict lang = new LangDict();
+    }
 </script>

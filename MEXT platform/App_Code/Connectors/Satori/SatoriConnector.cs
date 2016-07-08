@@ -12,8 +12,6 @@ public class SatoriReaderConnector
 
     private static String fireRequest(string @params)
     {
-        try
-        {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(@params);
             CookieContainer newContainer = new CookieContainer();
             SatoriDatabaseHelper.authorizeSession();
@@ -32,14 +30,7 @@ public class SatoriReaderConnector
                 resultString = dataStream.ReadToEnd();
             }
             return resultString;
-            //JObject resultJson = JObject.Parse(resultString);
-            //return resultJson;
-        }
-        catch (Exception ex)
-        {
-            dynamic test = ex;
-            return null;
-        }
+
     }
 
     //content.ToString(Formatting.None)
