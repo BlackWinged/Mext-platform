@@ -92,6 +92,19 @@ public class SatoriReaderConnector
         return cards;
     }
 
+    public static List<SatoriReview> getAllCards()
+    {
+        string parameters = "https://www.satorireader.com/api/studylist/all";
+        JObject resultJson = JObject.Parse(fireRequest(parameters));
+        List<JToken> rezultati = resultJson["result"].Children().ToList();
+        List<SatoriReview> cards = new List<SatoriReview>();
+        foreach (JToken item in rezultati)
+        {
+            cards.Add(JsonConvert.DeserializeObject<SatoriReview>(item.ToString()));
+        }
+        return cards;
+    }
+
     public static string sendCardStatus (string cardId)
     {
         string parameters = "https://www.satorireader.com/api/studylist/" + cardId;

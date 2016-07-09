@@ -40,14 +40,17 @@
                                 <label for="mnemonics">Alternative mnemonic</label><br />
                                 <textarea ng-model="ReviewContainer.currentCard.mnemonics" id="mnemonics" name="mnemonics"></textarea>  <br />
                                 {{ReviewContainer.currentCard.mnemonics}}<br />
-                                <div class="">
-                                    <a ng-href='#' id="next-card" ng-click='ReviewContainer.saveCard()' href="javascript:void(0);" class="btn btn-primary ">Save card</a>
-                                </div>
                             </div>
                             <form ng-submit="ReviewContainer.checkAnswer()">
                                 <input ng-disabled="ReviewContainer.showAll" ng-model="ReviewContainer.answer" id="answer" name="answer" />
                                 <input ng-disabled="ReviewContainer.showAll" type="submit" id="submit" name="submit" value="Check card"/>
                             </form>
+                            <h2 ng-show="ReviewContainer.showAll && ReviewContainer.currentCard.possibleSynonims">
+                                Possible synonims:
+                            </h2>
+                            <h2 ng-repeat="synonim in ReviewContainer.currentCard.possibleSynonims" ng-show="ReviewContainer.showAll">
+                                {{synonim}}
+                            </h2>
                         </div>
                     </div>
                 </div>

@@ -67,6 +67,7 @@
                 }); 
 
                 this.nextCard = function () {
+                    reviewContainer.saveCard();
                     reviewContainer.cardCount++;
                     reviewContainer.currentCard = reviewContainer.cards[reviewContainer.cardCount];
                     reviewContainer.buildHiraganaExpression();
@@ -95,7 +96,13 @@
                             reviewContainer.q = 0;
                         }
                     } else {
-                        if (reviewContainer.currentCard.full_definition.toLowerCase().replaceAll(" ", "").replaceAll("-", "").search(reviewContainer.answer.toLowerCase().replaceAll(" ", "").replaceAll("-", "")) > -1) {
+                        var definitionString = reviewContainer.currentCard.full_definition;
+                        angular.forEach(reviewContainer.currentCard.possibleSynonims, function (value, key) {
+                            definitionString += value;
+                        });
+                        definitionString = definitionString.toLowerCase().replaceAll(" ", "").replaceAll("-", "").replaceAll("'", "");
+
+                        if (definitionString.search(reviewContainer.answer.toLowerCase().replaceAll(" ", "").replaceAll("-", "")) > -1) {
                             alert("is bueno");
                             $http.post("AJAX/ajaxMethods.aspx/setCards", JSON.stringify({ data: reviewContainer.currentCard.cardId + "?q=" + reviewContainer.q })).success(function (data) {
                                 // alert(data.d);
@@ -148,11 +155,6 @@
                 this.saveCard = function () {
                     $http.post("AJAX/ajaxMethods.aspx/saveCardData", JSON.stringify({ card: reviewContainer.currentCard }));
                 }
-
-                this.saveCard = function () {
-                    $http.post("AJAX/ajaxMethods.aspx/saveCardData", JSON.stringify({ card: reviewContainer.currentCard }));
-                }
-
 
                 $scope.$on('keypress:13', function (onEvent, keypressEvent) {
                     if (reviewContainer.showAll == true) {

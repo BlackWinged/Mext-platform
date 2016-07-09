@@ -39,13 +39,25 @@ public class SatoriReview
             }
             return result;
         }
+        set 
+        {
+            Satori_word newWord = new Satori_word();
+            newWord.kanji = value;
+            Expression_text = new List<Satori_word>();
+            Expression_text.Add(newWord);
+        }
     }
+    private List<Satori_word> Expression_text;
     [Editable(false)]
     public List<Satori_word> expression_text
     {
         get
         {
             List<Satori_word> result = new List<Satori_word>();
+            if (Expression_text!= null)
+            {
+                return Expression_text;
+            }
             foreach (Match match in Regex.Matches(expression, "text\\\":\\\"(.*?)\\\"|reading\\\":\\\"(.*?)\\\"", RegexOptions.IgnoreCase))
             {
                 Satori_word newWord = new Satori_word();
@@ -62,6 +74,7 @@ public class SatoriReview
             return result;
         }
     }
+    private string dbDefinition { get; set; }
     [Editable(false)]
     public string definition { get; set; }
     [Column("definition")]
@@ -70,6 +83,9 @@ public class SatoriReview
         get
         {
             String result = "";
+            if (dbDefinition != null) {
+                return dbDefinition;
+            }
             if (definition == null)
             {
                 foreach (Match match in Regex.Matches(expression, "glosses\\\":\\\"(.*?)\\\"", RegexOptions.IgnoreCase))
@@ -86,6 +102,10 @@ public class SatoriReview
             }
             return result;
         }
+        set
+        {
+            dbDefinition = value;
+        }
     }
     public int? totalCorrect { get; set; }
     public int? totalIncorrect { get; set; }
@@ -100,6 +120,8 @@ public class SatoriReview
     public List<SatoriReview> contexts { get; set; }
     public string alternateDefinitions { get; set; }
     public string mnemonics { get; set; }
+    [Editable(false)]
+    public List<string> possibleSynonims { get; set; }
 }
 
 public class Satori_word

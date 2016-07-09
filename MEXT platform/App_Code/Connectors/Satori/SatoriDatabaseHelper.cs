@@ -50,7 +50,38 @@ public class SatoriDatabaseHelper
 
     public static SatoriReview checkIfCardExists(SatoriReview card, Users user)
     {
-        return conn.GetList<SatoriReview>("where userId=" + user.id  + " and entryId = '" + card.entryId + "'").SingleOrDefault<SatoriReview>();
+        return conn.GetList<SatoriReview>("where userId=" + user.id + " and entryId = '" + card.entryId + "'").SingleOrDefault<SatoriReview>();
+    }
+
+    public static List<SatoriReview> getSynonims(SatoriReview card, Users user)
+    {
+        string searchString = card.definition_text + card.alternateDefinitions;
+        searchString = searchString.Replace(" ", "");
+        searchString = searchString.Replace("-", "");
+        searchString = searchString.Replace("(", "");
+        searchString = searchString.Replace(")", "");
+        searchString = searchString.Replace("'", "");
+        List<string> searchItems = new List<string>();
+        searchItems = searchString.Split(';').ToList();
+        string where = "where userId = " + user.id + " and (";
+
+        foreach (string item in searchItems)
+        {
+            if (!item.Equals(string.Empty))
+            {
+                if (where.EndsWith("and ("))
+                {
+                    where += " definition like '%" + item + "%' or alternateDefinitions like '%" + item + "%'";
+                }
+                else
+                {
+                    where += " or definition like '%" + item + "%' or alternateDefinitions like '%" + item + "%'";
+                }
+            }
+        }
+        where += ") and entryId != '" + card.entryId + "'";
+
+        return conn.GetList<SatoriReview>(where).ToList<SatoriReview>();
     }
 
     public static void saveCardData(SatoriReview card, Users user)
@@ -61,7 +92,8 @@ public class SatoriDatabaseHelper
             card.id = newCard.id;
             card.userId = user.id;
             conn.Update(card);
-        } else
+        }
+        else
         {
             card.userId = user.id;
             conn.Insert(card);

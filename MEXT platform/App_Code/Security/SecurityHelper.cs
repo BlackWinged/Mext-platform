@@ -16,6 +16,8 @@ public class SecurityHelper
         Users currentUser = null;
         if (HttpContext.Current.Session[CollectionKeys.CurrentUser] == null)
         {
+            try
+            {
             if (((((HttpContext.Current.Request.Cookies["UserName"]) != null)) && (((HttpContext.Current.Request.Cookies["Password"]) != null))))
             {
                 currentUser = dbHelper.authenticateUser(HttpContext.Current.Request.Cookies["UserName"].Value, HttpContext.Current.Request.Cookies["Password"].Value);
@@ -31,6 +33,9 @@ public class SecurityHelper
             else
             {
                 HttpContext.Current.Response.Redirect("~/login.aspx?" + CollectionKeys.signInParameters + "=" + HttpContext.Current.Request.RawUrl);
+            }
+            } catch (InvalidOperationException ex)
+            {
             }
         }
     }
