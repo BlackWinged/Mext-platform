@@ -17,6 +17,7 @@ public class AuthFilter : IHttpModule
     {
         //ntext.post
         context.PostAcquireRequestState += this.Application_EndRequest;
+        context.EndRequest += this.Application_EndRequest;
         //AddHandler context.BeginRequest, AddressOf Me.Application_BeginRequest
         //AddHandler context.EndRequest, AddressOf Me.Application_EndRequest
         //AddHandler application.EndRequest, AddressOf Me.Application_EndRequest
