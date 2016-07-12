@@ -102,7 +102,7 @@
                         });
                         definitionString = definitionString.toLowerCase().replaceAll(" ", "").replaceAll("-", "").replaceAll("'", "");
 
-                        if (definitionString.search(reviewContainer.answer.toLowerCase().replaceAll(" ", "").replaceAll("-", "")) > -1) {
+                        if (definitionString.search(reviewContainer.answer.toLowerCase().replaceAll(" ", "").replaceAll("-", "").replaceAll("'", "")) > -1) {
                             alert("is bueno");
                             $http.post("AJAX/ajaxMethods.aspx/setCards", JSON.stringify({ data: reviewContainer.currentCard.cardId + "?q=" + reviewContainer.q })).success(function (data) {
                                 // alert(data.d);
