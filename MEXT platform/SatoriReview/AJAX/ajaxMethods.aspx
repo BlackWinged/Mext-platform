@@ -55,7 +55,7 @@
 
     <System.Web.Services.WebMethod>
     Public Shared Function saveCardData(card As SatoriReview) As String
-        SecurityHelper.authorizeSessionOrCookies
+        SecurityHelper.authorizeSessionOrCookies()
         Dim currentUser As Users = HttpContext.Current.Session(CollectionKeys.CurrentUser)
         SatoriDatabaseHelper.saveCardData(card, currentUser)
     End Function
