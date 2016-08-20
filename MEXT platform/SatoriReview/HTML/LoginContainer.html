@@ -1,0 +1,36 @@
+﻿<div class="row">
+    <div class="col-lg-12">
+        <div  class="wrapper wrapper-content animated fadeInRight" keypress-events>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5 ng-show="!LoginContainer.validatedSignIn">Checking user data...</h5>
+                            <h5 ng-show="LoginContainer.validatedSignIn">Login</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div ng-show="LoginContainer.validatedSignIn">
+                                <p>Login in with your satori account</p>
+                                <p ng-show="LoginContainer.serverMessage">{{LoginContainer.serverMessage}}</p>
+                                <form ng-submit="LoginContainer.submitLogin()" class="m-t" role="form" method="post">
+                                    <div class="form-group">
+                                        <input type="text" ng-model="LoginContainer.username" name="username" class="form-control" placeholder="Username" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" ng-model="LoginContainer.password" name="password" class="form-control" placeholder="Password" required="">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+</script>

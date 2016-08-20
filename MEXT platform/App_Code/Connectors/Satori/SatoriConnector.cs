@@ -10,26 +10,29 @@ using System.IO;
 public class SatoriReaderConnector
 {
 
-    private static String fireRequest(string @params)
+    private static String fireRequest(string @params, string username = "", string password = "")
     {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(@params);
-            CookieContainer newContainer = new CookieContainer();
-            SatoriDatabaseHelper.authorizeSession();
-            if (HttpContext.Current.Session["satori_cookies"] != null)
-            {
-                newContainer = (CookieContainer)HttpContext.Current.Session["satori_cookies"];
-            }
-            request.CookieContainer = newContainer;
-            NetworkCredential cred = new NetworkCredential("lovro.gamulin@gmail.com", "5h4d0wnet");
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(@params);
+        CookieContainer newContainer = new CookieContainer();
+        SatoriDatabaseHelper.authorizeSession();
+        if (HttpContext.Current.Session["satori_cookies"] != null)
+        {
+            newContainer = (CookieContainer)HttpContext.Current.Session["satori_cookies"];
+        }
+        request.CookieContainer = newContainer;
+        if (!username.Equals(""))
+        {
+            NetworkCredential cred = new NetworkCredential(username, password);
             request.Credentials = cred;
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            HttpContext.Current.Session["satori_cookies"] = request.CookieContainer;
-            string resultString = "";
-            using (StreamReader dataStream = new StreamReader(response.GetResponseStream()))
-            {
-                resultString = dataStream.ReadToEnd();
-            }
-            return resultString;
+        }
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        HttpContext.Current.Session["satori_cookies"] = request.CookieContainer;
+        string resultString = "";
+        using (StreamReader dataStream = new StreamReader(response.GetResponseStream()))
+        {
+            resultString = dataStream.ReadToEnd();
+        }
+        return resultString;
 
     }
 
@@ -47,7 +50,7 @@ public class SatoriReaderConnector
             // NetworkCredential cred = new NetworkCredential("lovro.gamulin@gmail.com", "5h4d0wnetM");
             //request.Credentials = cred;
             request.Method = method;
-            request.ContentType = "application/"+contentType;
+            request.ContentType = "application/" + contentType;
             StreamWriter requestStream = new StreamWriter(request.GetRequestStream());
             requestStream.Write(content);
             requestStream.Flush();
@@ -67,16 +70,24 @@ public class SatoriReaderConnector
         }
     }
 
-    public static void signIn(string username, string password)
+    public static string signIn(string username, string password)
     {
         string parameters = "https://www.satorireader.com/signin";
         string content = "username=" + HttpUtility.UrlEncode(username) + "&";
         content += "password=" + HttpUtility.UrlEncode(password);
-        fireRequest(parameters);
-        fireRequestWithMethod(parameters, content, "POST", "x-www-form-urlencoded");
-        Users user = (Users)HttpContext.Current.Session[ CollectionKeys.CurrentUser];
+        fireRequest(parameters, username, password);
+        string resultJson = fireRequestWithMethod(parameters, content, "POST", "x-www-form-urlencoded");
+        Users user = (Users)HttpContext.Current.Session[CollectionKeys.CurrentUser];
         CookieContainer cookieJar = (CookieContainer)HttpContext.Current.Session[CollectionKeys.satoriCookies];
         SatoriDatabaseHelper.saveUser(user.id, cookieJar);
+        return resultJson;
+    }
+
+    public static string checkIfCookieIsValid()
+    {
+        string parameters = "https://www.satorireader.com/api/studylist/due";
+        JObject resultJson = JObject.Parse(fireRequest(parameters));
+        return resultJson.ToString(Formatting.None);
     }
 
     public static List<SatoriReview> getDueCards()
@@ -105,7 +116,7 @@ public class SatoriReaderConnector
         return cards;
     }
 
-    public static string sendCardStatus (string cardId)
+    public static string sendCardStatus(string cardId)
     {
         string parameters = "https://www.satorireader.com/api/studylist/" + cardId;
         string result = fireRequestWithMethod(parameters, "", "PUT", "x-www-form-urlencoded");

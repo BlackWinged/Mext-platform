@@ -177,6 +177,7 @@
     <Content Include="css\plugins\touchspin\jquery.bootstrap-touchspin.min.css" />
     <Content Include="css\style.css" />
     <Content Include="login.aspx" />
+    <Content Include="register.aspx" />
     <Content Include="SatoriReview\AJAX\ajaxMethods.aspx" />
     <Content Include="SatoriReview\AJAX\validateChange.aspx" />
     <Content Include="SatoriReview\css\animate.css" />
@@ -276,6 +277,7 @@
     <Content Include="SatoriReview\font-awesome\css\font-awesome.min.css" />
     <Content Include="SatoriReview\font-awesome\fonts\fontawesome-webfonte0a5.svg" />
     <Content Include="SatoriReview\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="SatoriReview\HTML\LoginContainer.html" />
     <Content Include="SatoriReview\HTML\ReviewContainer.html" />
     <Content Include="SatoriReview\img\a1.jpg" />
     <Content Include="SatoriReview\img\a2.jpg" />
@@ -613,6 +615,7 @@
     <Content Include="SatoriReview\js\demo\peity-demo.js" />
     <Content Include="SatoriReview\js\demo\rickshaw-demo.js" />
     <Content Include="SatoriReview\js\demo\sparkline-demo.js" />
+    <Content Include="SatoriReview\js\SatoriLogic\loginModule.js" />
     <Content Include="SatoriReview\js\SatoriLogic\app.js" />
     <Content Include="SatoriReview\js\inspinia.js" />
     <Content Include="SatoriReview\js\jquery-2.1.1.js" />

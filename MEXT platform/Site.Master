@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>INSPINIA | Dashboard</title>
+    <title>Project Athena</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -159,7 +159,7 @@
 
 
                 <li>
-                    <a href="login.html">
+                    <a runat="server" href="~/login.aspx?logout=1">
                         <i class="fa fa-sign-out"></i> Log out
                     </a>
                 </li>

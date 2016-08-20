@@ -140,3 +140,9 @@ public class Satori_user
     public byte[] password { get; set; }
     public byte[] cookie { get; set; }
 }
+
+public class Satori_user_view
+{
+    public string username { get; set; }
+    public string password { get; set; }
+}

@@ -1,9 +1,24 @@
 ﻿(function () {
-    var app = angular.module("SatoriReader", [])
+    var app = angular.module("SatoriReader", ["LoginModule"])
 
-    app.controller("MainController", function () {
-        this.productGroup = {};
-    });
+    app.controller("MainController", ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
+        var main = this;
+        this.isSignedIn = false;
+
+        $http.post("AJAX/ajaxMethods.aspx/checkIfUserValid", { data: {} }).success(function (data) {
+            if (data.success == "False") {
+                main.isSignedIn = false;
+                $rootScope.$broadcast('needs_signin');
+            } else {
+                main.isSignedIn = true;
+                $rootScope.$broadcast('is_signed_in');
+            }
+        });
+        $scope.$on('logged_in', function (onEvent, keypressEvent) {
+            $rootScope.$broadcast('is_signed_in');
+            main.isSignedIn = true;
+        });
+    }]);
 
     app.directive("keypressEvents", [
   '$document',
@@ -27,7 +42,7 @@
             restrict: "E",
             templateUrl: "HTML/ReviewContainer.html",
             controllerAs: "ReviewContainer",
-            controller: ['$http', '$timeout', '$scope', function ($http, $timeout, $scope) {
+            controller: ['$http', '$timeout', '$scope', '$element', function ($http, $timeout, $scope, $element) {
                 var reviewContainer = this;
                 reviewContainer.cardCount = 0;
                 reviewContainer.cards = {};
@@ -49,22 +64,25 @@
                     }, 10000);
                 }
 
+                $scope.$on('is_signed_in', function (onEvent, keypressEvent) {
 
-                $http.post("AJAX/ajaxMethods.aspx/getCards", { data: {} }).success(function (data) {
-                    reviewContainer.cards = JSON.parse(data.d);
-                    reviewContainer.currentCard = reviewContainer.cards[reviewContainer.cardCount];
-                    reviewContainer.buildHiraganaExpression();
-                    reviewContainer.buildKanjiExpression();
-                    if (reviewContainer.currentCard.alternateDefinitions == null) {
-                        reviewContainer.currentCard.alternateDefinitions = "";
-                    }
-                    reviewContainer.currentCard.full_definition = reviewContainer.currentCard.definition_text + "; " + reviewContainer.currentCard.alternateDefinitions;
-                    reviewContainer.countDown();
-                    reviewContainer.isLoading = false;
-                }).error(function (error, status){
-                    reviewContainer.error = " message: " + JSON.stringify(error) + ", status: " + status;
-                    reviewContainer.isLoading = false;
-                }); 
+                    $http.post("AJAX/ajaxMethods.aspx/getCards", { data: {} }).success(function (data) {
+                        reviewContainer.cards = JSON.parse(data.d);
+                        reviewContainer.currentCard = reviewContainer.cards[reviewContainer.cardCount];
+                        reviewContainer.buildHiraganaExpression();
+                        reviewContainer.buildKanjiExpression();
+                        if (reviewContainer.currentCard.alternateDefinitions == null) {
+                            reviewContainer.currentCard.alternateDefinitions = "";
+                        }
+                        reviewContainer.currentCard.full_definition = reviewContainer.currentCard.definition_text + "; " + reviewContainer.currentCard.alternateDefinitions;
+                        reviewContainer.countDown();
+                        reviewContainer.isLoading = false;
+                    }).error(function (error, status) {
+                        reviewContainer.error = " message: " + JSON.stringify(error) + ", status: " + status;
+                        reviewContainer.isLoading = false;
+                    });
+
+                });
 
                 this.nextCard = function () {
                     reviewContainer.saveCard();

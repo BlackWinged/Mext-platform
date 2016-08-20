@@ -45,7 +45,14 @@ public class SatoriDatabaseHelper
     {
         Users user = (Users)HttpContext.Current.Session[CollectionKeys.CurrentUser];
         Satori_user satUser = conn.GetList<Satori_user>("where userId = " + user.id).SingleOrDefault<Satori_user>();
-        HttpContext.Current.Session[CollectionKeys.satoriCookies] = deserializeCooke(satUser.cookie);
+        try
+        {
+            HttpContext.Current.Session[CollectionKeys.satoriCookies] = deserializeCooke(satUser.cookie);
+        }
+        catch (Exception ex)
+        {
+        }
+
     }
 
     public static SatoriReview checkIfCardExists(SatoriReview card, Users user)

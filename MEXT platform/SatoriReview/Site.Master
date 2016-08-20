@@ -163,7 +163,7 @@
 
 
                         <li>
-                            <a href="login.html">
+                            <a runat="server" href="~/login.aspx?logout=1">
                                 <i class="fa fa-sign-out"></i>Log out
                             </a>
                         </li>
@@ -196,6 +196,7 @@
     <script src="js/jquery-2.1.1.js"></script>
     <script src="js/angular.min.js"></script>
     <script src="js/SatoriLogic/app.js"></script>
+    <script src="js/SatoriLogic/loginModule.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>

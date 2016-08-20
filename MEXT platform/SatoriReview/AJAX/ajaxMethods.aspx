@@ -54,6 +54,24 @@
     End Function
 
     <System.Web.Services.WebMethod>
+    Public Shared Function checkIfUserValid(data As Object)
+        SecurityHelper.authorizeSessionOrCookies()
+        Return SatoriReaderConnector.checkIfCookieIsValid()
+    End Function
+
+    <System.Web.Services.WebMethod>
+    Public Shared Function signIn(data As Satori_user_view)
+        SecurityHelper.authorizeSessionOrCookies()
+        Dim result As String = SatoriReaderConnector.signIn(data.username, data.password)
+        If result.Contains("Could not log in with the specified") Then
+            Return "fail"
+        Else
+            Return "success"
+        End If
+
+    End Function
+
+    <System.Web.Services.WebMethod>
     Public Shared Function saveCardData(card As SatoriReview) As String
         SecurityHelper.authorizeSessionOrCookies()
         Dim currentUser As Users = HttpContext.Current.Session(CollectionKeys.CurrentUser)
