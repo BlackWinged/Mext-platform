@@ -176,6 +176,7 @@
     <Content Include="css\plugins\toastr\toastr.min.css" />
     <Content Include="css\plugins\touchspin\jquery.bootstrap-touchspin.min.css" />
     <Content Include="css\style.css" />
+    <Content Include="Default.aspx" />
     <Content Include="login.aspx" />
     <Content Include="register.aspx" />
     <Content Include="SatoriReview\AJAX\ajaxMethods.aspx" />
@@ -1552,7 +1553,6 @@
     <Content Include="img\p_big3.jpg" />
     <Content Include="img\rails_logo.png" />
     <Content Include="img\zender_logo.png" />
-    <Content Include="Default.aspx" />
     <Content Include="js\angular.min.js" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
@@ -1646,7 +1646,6 @@
     <Content Include="js\plugins\video\responsible-video.js" />
     <Content Include="js\plugins\wow\wow.min.js" />
     <Content Include="packages.config" />
-    <Content Include="Site.Master" />
     <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
     <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />

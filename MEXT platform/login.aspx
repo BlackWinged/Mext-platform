@@ -4,7 +4,7 @@
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Request.QueryString["logout"] != null && Request.HttpMethod.Equals("GET")){
-
+            logout();
         }
         if (Request.HttpMethod.Equals("POST"))
         {
@@ -72,15 +72,11 @@
         <div>
             <div>
 
-                <h1 class="logo-name">IN+</h1>
+                <h1 class="logo-name">PA</h1>
 
             </div>
-            <h3>Welcome to IN+</h3>
-            <p>
-                Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
-                <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
-            </p>
-            <p>Login in. To see it in action.</p>
+            <h3>Project Athena</h3>
+            <p>Put in your userneme in the little boxy thingies below.</p>
             <form class="m-t" role="form" method="post">
                 <div class="form-group">
                     <input type="text" name="username" class="form-control" placeholder="Username" required="">
@@ -90,9 +86,10 @@
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
 
-                <a href="#"><small>Forgot password?</small></a>
+                <%--<a href="#"><small>Forgot password?</small></a>--%>
                 <p class="text-muted text-center"><small>Do not have an account?</small></p>
-                <a class="btn btn-sm btn-white btn-block" href="register.html">Create an account</a>
+                <a class="btn btn-sm btn-white btn-block" href="register.aspx">Create an account</a>
+                <a class="btn btn-sm btn-white btn-block" href="default.aspx">Cancel login</a>
             </form>
         </div>
     </div>
