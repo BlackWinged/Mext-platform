@@ -6,7 +6,8 @@
         this.isSignedIn = false;
 
         $http.post("AJAX/ajaxMethods.aspx/checkIfUserValid", { data: {} }).success(function (data) {
-            if (data.success == "False") {
+            var status = JSON.parse(data.d);
+            if (status.success == false) {
                 main.isSignedIn = false;
                 $rootScope.$broadcast('needs_signin');
             } else {
